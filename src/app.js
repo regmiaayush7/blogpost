@@ -1,10 +1,31 @@
-const greeting = 'Hello World';
-console.log(greeting);
+import {http} from './http';
+import {ui} from './ui'
 
-const getData = async (url) => {
-  const response = await fetch(url);
-  const result = await response.json();
-  console.log(result);
-};
+//Get posts on DOM load
+document.addEventListener('DOMContentLoaded', getPosts);
+//Submit Posts when button click
+document.querySelector('.post-submit').addEventListener('click', submitPost);
 
-getData('https://jsonplaceholder.typicode.com/posts');
+function getPosts(){
+  http.get('http://localhost:3000/posts')
+  .then(data => ui.showPosts(data))
+  .catch(err => console.log(err));
+}
+
+function submitPost(){
+  const title = document.querySelector('#title').value;
+  const body = document.querySelector('#body').value;
+  
+  const data = {
+    title,
+    body
+  }
+  
+  http.post('http://localhost:3000/posts', data)
+  .then( data => {
+    getPosts(),
+    ui.showAlert('Post Added', 'alert alert-success'),
+    ui.clearFields()
+  })
+  .catch(err => console.log(err));
+}
