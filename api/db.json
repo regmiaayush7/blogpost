@@ -11,14 +11,9 @@
       "body": "This is post two"
     },
     {
-      "id": 3,
-      "title": "Post Three",
-      "body": "This is post three"
-    },
-    {
-      "title": "Post Four",
-      "body": "I want to break free",
-      "id": 4
+      "title": "Post Three ",
+      "body": "I am about to create a cool blog posts\n",
+      "id": 3
     }
   ]
 }
